@@ -63,12 +63,8 @@ public abstract class AbstractPostState<T extends AbstractModel> extends Abstrac
 	{
 		defineLocationLink( );
 
-		defineTransitionLinks( );
-
 		return this.responseBuilder.build( );
 	}
-	
-	protected abstract void defineTransitionLinks( );
 
 	protected void defineLocationLink( )
 	{

@@ -40,13 +40,6 @@ public class DeleteSinglePerson extends AbstractDeleteState<Person>
 		return DaoFactory.getInstance( ).getPersonDao( ).delete( this.modelIdToDelete );
 	}
 
-	@Override protected void defineTransitionLinks( )
-	{
-		addLink( PersonUri.REL_PATH,
-			PersonRelTypes.GET_ALL_PERSONS,
-			getAcceptRequestHeader( ) );
-	}
-
 	public static class Builder extends AbstractDeleteStateBuilder
 	{
 		@Override public AbstractState build( )

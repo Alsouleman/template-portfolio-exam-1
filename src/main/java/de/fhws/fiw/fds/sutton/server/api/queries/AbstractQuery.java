@@ -26,16 +26,8 @@ public abstract class AbstractQuery<T extends AbstractModel>
 {
 	protected CollectionModelResult<T> result;
 
-	protected PagingBehavior pagingBehavior = new OnePageWithAllResults( );
-
 	protected AbstractQuery( )
 	{
-	}
-
-	public AbstractQuery setPagingBehavior( final PagingBehavior pagingBehavior )
-	{
-		this.pagingBehavior = pagingBehavior;
-		return this;
 	}
 
 	public final CollectionModelResult<T> startQuery( )
@@ -51,7 +43,7 @@ public abstract class AbstractQuery<T extends AbstractModel>
 
 		try
 		{
-			result = selectRequestedPage( doExecuteQuery( ) );
+			result = doExecuteQuery( );
 		}
 		catch ( final DatabaseException e )
 		{
@@ -61,32 +53,7 @@ public abstract class AbstractQuery<T extends AbstractModel>
 		return result;
 	}
 
-	protected CollectionModelResult<T> selectRequestedPage( final CollectionModelResult<T> fullResult )
-	{
-		return this.pagingBehavior.page( fullResult );
-	}
-
 	protected abstract CollectionModelResult<T> doExecuteQuery( ) throws DatabaseException;
-
-	public final void addSelfLink( final PagingContext pagingContext )
-	{
-		this.pagingBehavior.addSelfLink( pagingContext );
-	}
-
-	public final void addPrevPageLink( final PagingContext pagingContext )
-	{
-		this.pagingBehavior.addPrevPageLink( pagingContext );
-	}
-
-	public final void addNextPageLink( final PagingContext pagingContext )
-	{
-		this.pagingBehavior.addNextPageLink( pagingContext, this.result );
-	}
-
-	public final void addPageHeader( final PagingContext pagingContext )
-	{
-		this.pagingBehavior.addPageHeader( pagingContext, this.result );
-	}
 
 	protected Predicate<T> all( )
 	{

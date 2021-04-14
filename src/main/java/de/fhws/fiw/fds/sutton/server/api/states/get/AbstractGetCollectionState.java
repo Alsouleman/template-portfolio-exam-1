@@ -17,7 +17,6 @@
 package de.fhws.fiw.fds.sutton.server.api.states.get;
 
 import de.fhws.fiw.fds.sutton.server.api.queries.AbstractQuery;
-import de.fhws.fiw.fds.sutton.server.api.queries.PagingContext;
 import de.fhws.fiw.fds.sutton.server.api.states.AbstractState;
 import de.fhws.fiw.fds.sutton.server.database.results.CollectionModelResult;
 import de.fhws.fiw.fds.sutton.server.models.AbstractModel;
@@ -26,10 +25,6 @@ import javax.ws.rs.core.Response;
 
 public abstract class AbstractGetCollectionState<T extends AbstractModel> extends AbstractState
 {
-	public static final String HEADER_TOTALNUMBEROFRESULTS = "X-totalnumberofresults";
-
-	public static final String HEADER_NUMBEROFRESULTS = "X-numberofresults";
-
 	protected AbstractQuery<T> query;
 
 	protected CollectionModelResult<T> result;
@@ -63,69 +58,12 @@ public abstract class AbstractGetCollectionState<T extends AbstractModel> extend
 
 	protected Response createResponse( )
 	{
-		defineHttpHeaderTotalNumberOfResults( );
-
-		defineHttpHeaderNumberOfResults( );
-
 		defineHttpResponseBody( );
-
-		defineSelfLink( );
-
-		definePagingLinks( );
-
-		defineTransitionLinks( );
 
 		return this.responseBuilder.build( );
 	}
 
-	protected void defineHttpHeaderTotalNumberOfResults( )
-	{
-		this.responseBuilder.header( getHeaderForTotalNumberOfResults( ), this.result.getTotalNumberOfResult( ) );
-	}
-
-	protected String getHeaderForTotalNumberOfResults( )
-	{
-		return HEADER_TOTALNUMBEROFRESULTS;
-	}
-
 	protected abstract void defineHttpResponseBody( );
-
-	protected void defineHttpHeaderNumberOfResults( )
-	{
-		this.responseBuilder.header( getHeaderForNumberOfResults( ),
-			this.result.getResult( )
-					   .size( ) );
-	}
-
-	protected String getHeaderForNumberOfResults( )
-	{
-		return HEADER_NUMBEROFRESULTS;
-	}
-
-	/**
-	 * This method is used to define all transition links based on the idea of a REST system as
-	 * a finite state machine.
-	 */
-	protected abstract void defineTransitionLinks( );
-
-	protected void definePagingLinks( )
-	{
-		final PagingContext pagingContext = createPagingContext( );
-
-		this.query.addPrevPageLink( pagingContext );
-		this.query.addNextPageLink( pagingContext );
-		this.query.addPageHeader( pagingContext );
-	}
-
-	protected void defineSelfLink( )
-	{
-		this.query.addSelfLink( createPagingContext( ) );
-	}
-
-	private PagingContext createPagingContext( )
-	{
-		return new PagingContext( this.uriInfo, this.responseBuilder, getAcceptRequestHeader( ) );
-	}
 
 	public static abstract class AbstractGetCollectionStateBuilder<T extends AbstractModel> extends AbstractStateBuilder
 	{

@@ -16,14 +16,11 @@
 
 package de.fhws.fiw.fds.sutton.server.api.states.get;
 
-import de.fhws.fiw.fds.sutton.server.api.hyperlinks.Hyperlinks;
 import de.fhws.fiw.fds.sutton.server.api.states.AbstractState;
 import de.fhws.fiw.fds.sutton.server.database.results.SingleModelResult;
 import de.fhws.fiw.fds.sutton.server.models.AbstractModel;
 
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriBuilder;
-import java.net.URI;
 
 public abstract class AbstractGetState<T extends AbstractModel> extends AbstractState
 {
@@ -67,30 +64,12 @@ public abstract class AbstractGetState<T extends AbstractModel> extends Abstract
 	{
 		defineHttpResponseBody( );
 
-		defineSelfLink( );
-
-		defineTransitionLinks( );
-
 		return this.responseBuilder.build( );
 	}
 
 	protected void defineHttpResponseBody( )
 	{
 		this.responseBuilder.entity( this.requestedModel.getResult( ) );
-	}
-
-	/**
-	 * This method is used to define all transition links based on the idea of a REST system as
-	 * a finite state machine.
-	 */
-	protected abstract void defineTransitionLinks( );
-
-	protected void defineSelfLink( )
-	{
-		final UriBuilder builder = this.uriInfo.getAbsolutePathBuilder( );
-		final URI self = builder.build( );
-
-		Hyperlinks.addLink( this.responseBuilder, self, "self", getAcceptRequestHeader( ) );
 	}
 
 	public static abstract class AbstractGetStateBuilder extends AbstractState.AbstractStateBuilder

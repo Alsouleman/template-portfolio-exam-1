@@ -22,8 +22,6 @@ import de.fhws.fiw.fds.sutton.server.database.results.SingleModelResult;
 import de.fhws.fiw.fds.sutton.server.models.AbstractModel;
 
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriBuilder;
-import java.net.URI;
 
 public abstract class AbstractPutState<T extends AbstractModel> extends AbstractState
 {
@@ -83,10 +81,6 @@ public abstract class AbstractPutState<T extends AbstractModel> extends Abstract
 
 		defineHttpResponseBody( );
 
-		defineSelfLink( );
-
-		defineTransitionLinks( );
-
 		return this.responseBuilder.build( );
 	}
 
@@ -98,20 +92,6 @@ public abstract class AbstractPutState<T extends AbstractModel> extends Abstract
 	private void defineHttpResponseBody( )
 	{
 		this.responseBuilder.entity( "" );
-	}
-
-	/**
-	 * This method is used to define all transition links based on the idea of a REST system as
-	 * a finite state machine.
-	 */
-	protected abstract void defineTransitionLinks( );
-
-	protected void defineSelfLink( )
-	{
-		final UriBuilder builder = this.uriInfo.getAbsolutePathBuilder( );
-		final URI self = builder.build( );
-
-		this.responseBuilder.link( self, "self" );
 	}
 
 	public static abstract class AbstractPutStateBuilder<T extends AbstractModel>

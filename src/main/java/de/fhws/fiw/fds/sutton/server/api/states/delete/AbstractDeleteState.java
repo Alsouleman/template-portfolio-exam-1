@@ -71,8 +71,6 @@ public abstract class AbstractDeleteState<T extends AbstractModel> extends Abstr
 
 		defineHttpResponseBody( );
 
-		defineTransitionLinks( );
-
 		return this.responseBuilder.build( );
 	}
 
@@ -85,12 +83,6 @@ public abstract class AbstractDeleteState<T extends AbstractModel> extends Abstr
 	{
 		this.responseBuilder.entity( this.modelToDelete.getResult( ) );
 	}
-
-	/**
-	 * This method is used to define all transition links based on the idea of a REST system as
-	 * a finite state machine.
-	 */
-	protected abstract void defineTransitionLinks( );
 
 	public static abstract class AbstractDeleteStateBuilder extends AbstractState.AbstractStateBuilder
 	{

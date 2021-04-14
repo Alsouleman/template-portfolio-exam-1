@@ -17,7 +17,6 @@
 package de.fhws.fiw.fds.suttondemo;
 
 import de.fhws.fiw.fds.sutton.server.api.AbstractApplication;
-import de.fhws.fiw.fds.suttondemo.api.services.DispatcherService;
 import de.fhws.fiw.fds.suttondemo.api.services.PersonService;
 
 import javax.ws.rs.ApplicationPath;
@@ -32,7 +31,6 @@ public class SuttonDemoApplication extends AbstractApplication
 		final Set<Class<?>> returnValue = new HashSet<>( );
 
 		returnValue.add( PersonService.class );
-		returnValue.add( DispatcherService.class );
 
 		return returnValue;
 	}

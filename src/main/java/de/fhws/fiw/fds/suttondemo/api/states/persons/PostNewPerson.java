@@ -34,11 +34,6 @@ public class PostNewPerson extends AbstractPostState<Person>
 		return DaoFactory.getInstance( ).getPersonDao( ).create( this.modelToStore );
 	}
 
-	@Override protected void defineTransitionLinks( )
-	{
-
-	}
-
 	public static class Builder extends AbstractPostStateBuilder<Person>
 	{
 		@Override public AbstractState build( )

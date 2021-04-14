@@ -34,18 +34,6 @@ public class GetSinglePerson extends AbstractGetState<Person>
 		return DaoFactory.getInstance( ).getPersonDao( ).readById( this.requestedId );
 	}
 
-	@Override protected void defineTransitionLinks( )
-	{
-		addLink( PersonUri.REL_PATH_ID,
-			PersonRelTypes.UPDATE_SINGLE_PERSON,
-			getAcceptRequestHeader( ),
-			this.requestedId );
-		addLink( PersonUri.REL_PATH_ID,
-			PersonRelTypes.DELETE_SINGLE_PERSON,
-			getAcceptRequestHeader( ),
-			this.requestedId );
-	}
-
 	public static class Builder extends AbstractGetStateBuilder
 	{
 		@Override public AbstractState build( )

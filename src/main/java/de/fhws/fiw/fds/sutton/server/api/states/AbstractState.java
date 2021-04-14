@@ -16,8 +16,6 @@
 
 package de.fhws.fiw.fds.sutton.server.api.states;
 
-import de.fhws.fiw.fds.sutton.server.api.hyperlinks.Hyperlinks;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.core.Request;
@@ -81,27 +79,6 @@ public abstract class AbstractState
 	protected void configureState( )
 	{
 
-	}
-
-	/**
-	 * Add a link to the response builder. This method should be called by sub-classes during
-	 * processing of the request, for example as part of method {@link #buildInternal()}.
-	 *
-	 * @param uriTemplate a template of an absolute URI
-	 * @param relType     the relation type of this link
-	 * @param params      parameters that are replaced in the given template
-	 */
-	protected final void addLink( final String uriTemplate,
-		final String relType,
-		final String mediaType,
-		final Object... params )
-	{
-		Hyperlinks.addLink( this.uriInfo, this.responseBuilder, uriTemplate, relType, mediaType, params );
-	}
-
-	protected final void addLink( final String uriTemplate, final String relType, final Object... params )
-	{
-		Hyperlinks.addLink( this.uriInfo, this.responseBuilder, uriTemplate, relType, null, params );
 	}
 
 	protected final String getAcceptRequestHeader( )

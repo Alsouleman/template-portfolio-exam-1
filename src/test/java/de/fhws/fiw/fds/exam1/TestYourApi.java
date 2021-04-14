@@ -14,23 +14,17 @@
  *  limitations under the License.
  */
 
-package de.fhws.fiw.fds.sutton.server.api.services;
+package de.fhws.fiw.fds.exam1;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.container.ContainerRequestContext;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.Request;
-import javax.ws.rs.core.UriInfo;
+import org.junit.Test;
 
-public class AbstractService
+import static org.junit.Assert.assertTrue;
+
+public class TestYourApi
 {
-	@Context protected ContainerRequestContext context;
-
-	@Context protected UriInfo uriInfo;
-
-	@Context protected ContainerRequestContext requestContext;
-
-	@Context protected Request request;
-
-	@Context protected HttpServletRequest httpServletRequest;
+	@Test
+	public void test_dispatcher_return_200( )
+	{
+		assertTrue( true );
+	}
 }

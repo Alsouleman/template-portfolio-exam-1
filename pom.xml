@@ -41,7 +41,7 @@
                             <archive>
                                 <manifest>
                                     <mainClass>
-                                        de.fhws.fiw.pvs.exam.StartFromJar
+                                        de.fhws.fiw.fds.exam1.StartFromJar
                                     </mainClass>
                                 </manifest>
                             </archive>
